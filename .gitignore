@@ -23,4 +23,5 @@ erl_crash.dump
 casefy-*.tar
 
 .elixir_ls
-
+deps
+_build

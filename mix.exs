@@ -4,8 +4,8 @@ defmodule Casefy.MixProject do
   def project do
     [
       app: :casefy,
-      version: "0.1.2",
-      elixir: "~> 1.9",
+      version: "0.1.3",
+      elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "Casefy",

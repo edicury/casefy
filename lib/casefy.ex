@@ -1,30 +1,28 @@
 defmodule Casefy do
-  defp casefy(object, module) do
+
+  defp casefy(object, module) when is_map(object) do
     keys = Map.keys(object)
 
     Enum.reduce(keys, Map.new(), fn element, acc ->
       transform = is_atom(element)
-
       el =
         transform
         |> case do
           true -> Atom.to_string(element)
           false -> element
         end
-
       camel_key = apply(module, :convert, [el])
       current_value = Map.get(object, element)
-      has_keys = is_map(current_value)
-
-      nested =
-        has_keys
-        |> case do
-          true -> casefy(current_value, module)
-          false -> current_value
-        end
-
-      Map.put(acc, camel_key, nested)
+      Map.put(acc, camel_key, casefy(current_value, module))
     end)
+  end
+
+  defp casefy(list, module) when is_list(list) do
+    list |> Enum.map(fn e -> casefy(e, module) end)
+  end
+
+  defp casefy(any, _module) do
+    any
   end
 
   def camel_case(object), do: casefy(object, Recase.CamelCase)
