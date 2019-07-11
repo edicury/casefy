@@ -42,8 +42,8 @@ Or directly on your Controller, use:
 ```elixir
   use Casefy.View, parse: :camel_case
 
-  renderer(render(MyView, "index.json", %{snake_case: %{another_nested: %{case_fy: 1}}}))
-  # returns %{ "snakeCase" => %{ "anotherNested" => %{ "caseFy: 1 } }}
+  renderer(render(MyView, "index.json", %{snakeCase: %{anotherNested: %{caseFy: 1}}}), :snake_case)
+  # returns %{ "snake_case" => %{ "another_nested" => %{ "case_fy: 1 } }}
 ```
 
 ## Tests
