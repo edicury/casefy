@@ -16,6 +16,18 @@
   # returns  %{ "snake_case" => 1, "nested_case" => %{ "another_case" => 1 } }
 ```
 
+# Plug
+
+On your Router, use:
+
+```elixir
+  pipeline :api do
+    plug :accepts, ["json"]
+    ...
+    plug Casefy.Plug, fields: [:query_params, :params, :body_params] # parses all camelCase input to snake_case inside your controller
+  end
+```
+
 ## Tests
 
 ```sh
@@ -30,7 +42,7 @@ by adding `casefy` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:casefy, "~> 0.1.0"}
+    {:casefy, "~> 0.1.2"}
   ]
 end
 ```

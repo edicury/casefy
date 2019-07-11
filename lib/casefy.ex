@@ -3,7 +3,16 @@ defmodule Casefy do
     keys = Map.keys(object)
 
     Enum.reduce(keys, Map.new(), fn element, acc ->
-      camel_key = apply(module, :convert, [Atom.to_string(element)])
+      transform = is_atom(element)
+
+      el =
+        transform
+        |> case do
+          true -> Atom.to_string(element)
+          false -> element
+        end
+
+      camel_key = apply(module, :convert, [el])
       current_value = Map.get(object, element)
       has_keys = is_map(current_value)
 
@@ -19,5 +28,6 @@ defmodule Casefy do
   end
 
   def camel_case(object), do: casefy(object, Recase.CamelCase)
+  @spec snake_case(map) :: any
   def snake_case(object), do: casefy(object, Recase.SnakeCase)
 end

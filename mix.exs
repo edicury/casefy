@@ -4,7 +4,7 @@ defmodule Casefy.MixProject do
   def project do
     [
       app: :casefy,
-      version: "0.1.0",
+      version: "0.1.2",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -26,7 +26,8 @@ defmodule Casefy.MixProject do
   defp deps do
     [
       {:recase, "~> 0.1"},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      {:plug_cowboy, "~> 2.0"}
     ]
   end
 
