@@ -31,7 +31,7 @@ On your Router, use:
 ## Tests
 
 ```sh
-  mix tests
+  mix test
 ```
 
 ## Installation
