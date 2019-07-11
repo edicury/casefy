@@ -28,6 +28,24 @@ On your Router, use:
   end
 ```
 
+# View
+On your View, use:
+```elixir
+  use Casefy.View, parse: :camel_case
+
+  def render("index.json", %{snake_case: snake_case}) do
+    renderer(%{data: snake_case}) # by default, applies deep camel_case parsing
+  end
+```
+
+Or directly on your Controller, use:
+```elixir
+  use Casefy.View, parse: :camel_case
+
+  renderer(render(MyView, "index.json", %{snake_case: %{another_nested: %{case_fy: 1}}}))
+  # returns %{ "snakeCase" => %{ "anotherNested" => %{ "caseFy: 1 } }}
+```
+
 ## Tests
 
 ```sh
@@ -42,7 +60,7 @@ by adding `casefy` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:casefy, "~> 0.1.2"}
+    {:casefy, "~> 0.1.4"}
   ]
 end
 ```
