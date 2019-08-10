@@ -60,7 +60,7 @@ by adding `casefy` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:casefy, "~> 0.1.4"}
+    {:casefy, "~> 0.1.5"}
   ]
 end
 ```

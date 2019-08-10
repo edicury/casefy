@@ -3,8 +3,15 @@ defmodule CasefyTest do
   doctest Casefy
 
   test "returns deeply nested object in camelCase format" do
-    expected = %{"camelCase" => 1, "anotherKey" => %{"nestedKey" => 2, "anotherNestedKey" => [%{"insideArray" => 1}]}}
-    assert Casefy.camel_case(%{camel_case: 1, another_key: %{nested_key: 2, another_nested_key: [%{inside_array: 1}]}}) == expected
+    expected = %{
+      "camelCase" => 1,
+      "anotherKey" => %{"nestedKey" => 2, "anotherNestedKey" => [%{"insideArray" => 1}]}
+    }
+
+    assert Casefy.camel_case(%{
+             camel_case: 1,
+             another_key: %{nested_key: 2, another_nested_key: [%{inside_array: 1}]}
+           }) == expected
   end
 
   test "returns deeply nested object in snake_case format" do
@@ -12,4 +19,8 @@ defmodule CasefyTest do
     assert Casefy.snake_case(%{camelCase: 1, anotherKey: %{nestedKey: 2}}) == expected
   end
 
+  test "returns deeply nested object with list into camelCase format" do
+    expected = %{"camelCase" => 1, "anotherKey" => [%{"nestedKey" => 2}]}
+    assert Casefy.camel_case(%{camel_case: 1, another_key: [%{nested_key: 2}]}) == expected
+  end
 end
